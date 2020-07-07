@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container main-label">
+    <h1 class="display-4 text-center">My Collection</h1>
+    <p class="lead text-center mb-5">Search for products to add them to your collection.</p>
+</div>
+
+{% include 'display_products.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
+<script src='/static/edit_collection.js'></script>
+{% endblock %}

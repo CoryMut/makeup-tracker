@@ -1,0 +1,178 @@
+html,
+body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	/* overflow: scroll; */
+}
+
+/* ::-webkit-scrollbar {
+	width: 0px;
+	background: transparent;
+} */
+
+.main-label {
+	margin-top: 75px;
+}
+
+.editBtn {
+	width: 90%;
+	margin: 3px 2px 3px 2px;
+}
+
+.btn-green {
+	background-color: green;
+}
+
+.fakeBtn {
+	background: none !important;
+	border: none;
+	/* padding: 0 !important; */
+	/*optional*/
+	font-family: arial, sans-serif;
+	/*input has OS specific font-family*/
+	color: #069;
+	/* text-decoration: underline; */
+	cursor: pointer;
+}
+
+.fakeBtn:focus,
+.fakeBtn:hover {
+	color: #cbd3da !important;
+}
+
+#checkboxes {
+	background-color: #f5f5f5;
+	width: 200px;
+}
+
+.mini-color {
+	width: 50px;
+	height: 50px;
+}
+
+.centered {
+	position: fixed; /* or absolute */
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	height: 100px;
+	font-weight: bold;
+	/* background-color: black; */
+	color: azure;
+}
+
+.center-span {
+	width: 400px;
+	height: 400px;
+}
+
+.hidden {
+	display: none;
+}
+
+tr {
+	margin: 500px !important;
+}
+
+.navbar-brand img {
+	display: inline-block;
+	width: 60px;
+	height: auto;
+}
+
+.card-img-top2 {
+	width: 100%;
+	height: 15vw;
+	/* min-height: 394px; */
+	object-fit: cover;
+}
+
+.card-img {
+	width: 150px !important;
+	height: 150px !important;
+	max-width: 150px;
+	max-height: 150px;
+}
+
+.card img:hover {
+	opacity: 1;
+	-webkit-transform: scale(.95);
+	-ms-transform: scale(1.03);
+	transform: scale(.95);
+}
+
+@media (max-width: 991px) {
+	.navbar {
+		position: relative;
+		min-height: 80px;
+	}
+	.navbar-brand img {
+		position: absolute;
+		margin-top: 6px;
+		top: 0;
+		left: 46.5%;
+		display: block;
+	}
+
+	.active {
+		margin-top: 40px;
+	}
+
+	.form-control {
+		width: 70%;
+		margin: auto;
+	}
+}
+
+@media (max-width: 770px) {
+	.navbar-brand img {
+		position: absolute;
+		margin-top: 6px;
+		top: 0;
+		left: 46%;
+		display: block;
+	}
+}
+
+@media (max-width: 600px) {
+	.navbar-brand img {
+		position: absolute;
+		margin-top: 6px;
+		top: 0;
+		left: 44.5%;
+		display: block;
+	}
+}
+
+@media (max-width: 500px) {
+	.navbar-brand img {
+		position: absolute;
+		margin-top: 6px;
+		top: 0;
+		left: 43.5%;
+		display: block;
+	}
+}
+
+@media (max-width: 400px) {
+	.navbar-brand img {
+		position: absolute;
+		margin-top: 6px;
+		top: 0;
+		left: 42.5%;
+		display: block;
+	}
+}
+
+@media (max-width: 300px) {
+	.navbar-brand img {
+		position: absolute;
+		margin-top: 6px;
+		top: 0;
+		left: 39.5%;
+		display: block;
+	}
+}

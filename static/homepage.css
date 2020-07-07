@@ -1,0 +1,35 @@
+/* .background-pics {
+	position: relative;
+}
+
+#mainpic1 {
+	width: auto;
+	height: 100vh;
+}
+
+#mainpic2 {
+	position: absolute;
+	top: 0;
+	left: 100;
+	width: auto;
+	height: 50vh;
+} */
+
+/* #mainpic3 {
+	width: auto;
+	height: auto;
+	object-fit: cover;
+} */
+
+.background-pic {
+	background-image: url('/static/palette.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 110vh; /*95.5*/
+	width: 100vw;
+	position: relative;
+	overflow-y: hidden;
+	max-width: 100%;
+	max-height: 100%;
+}

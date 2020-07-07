@@ -1,0 +1,9 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <section class="messages form-row form-group justify-content-center">
+            {% for category, msg in messages %}
+                <p class="alert alert-{{category}}">{{msg}}</p>
+            {% endfor %}
+        </section>
+        {% endif %}
+{% endwith %}

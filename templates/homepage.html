@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<!-- <div class="background-pics">
+<img id="mainpic1" src="static/woman_wearing_makeup.jpg">
+<img id="mainpic2" src="static/powder_makeup.jpg" class="float-right">
+<img id="mainpic3" src="static/palette.jpg">
+</div> -->
+<div class="background-pic"></div>
+<div class="centered">
+    <span class="center-span" style="backdrop-filter: blur(6px);">
+        <h4 class="display-3">All your makeup</h4>
+        <p class="lead text-right mr-5" style="font-size: 2rem;">All in one place :)</p>
+        <span class="d-flex justify-content-end" style="width: 340px;">
+        <a href="/collection" class="btn btn-primary float-right mb-3">My Collection</a>
+        </span>
+    </span>
+</div>
+
+<script>
+function noScroll() {
+    window.scrollTo(0, 0)
+}
+
+window.addEventListener('scroll', noScroll)
+</script>
+{% endblock %}
