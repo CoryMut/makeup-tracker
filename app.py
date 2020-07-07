@@ -22,12 +22,18 @@ app = Flask(__name__)
 load_dotenv()
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = (
-    os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS") == 'True')
-app.config['SQLALCHEMY_ECHO'] = (os.getenv("SQLALCHEMY_ECHO") == 'True')
-app.config["SECRET_KEY"] = environ.get("SECRET_KEY")
-app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = (os.getenv("DEBUG_TB_INTERCEPT_REDIRECTS") == 'True')
+# app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = (
+#     os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS") == 'True')
+# app.config['SQLALCHEMY_ECHO'] = (os.getenv("SQLALCHEMY_ECHO") == 'True')
+# app.config["SECRET_KEY"] = environ.get("SECRET_KEY")
+# app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = (os.getenv("DEBUG_TB_INTERCEPT_REDIRECTS") == 'True')
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI', 'postgresql:///makeup3')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = False
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY","b'x8cDxd2xb8xcbx03xxe8x89x87x07xb9x0cx0b'")
+app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
 
 
 connect_db(app)
