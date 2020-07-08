@@ -10,23 +10,6 @@ def connect_db(app):
     db.init_app(app)
 
 
-# class Product(db.Model):
-#     """Creates pets table with id, name, species, photo_url, age, notes, and availability."""
-#     __tablename__ = "products"
-
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     name = db.Column(db.Text, nullable=False)
-#     link = db.Column(db.Text, nullable=False)
-#     brand = db.Column(db.Text, nullable=False)
-#     price = db.Column(db.Text, nullable=False)
-#     product_id = db.Column(db.Text, nullable=False)
-#     product_site = db.Column(db.Text, nullable=False, default='N/A')
-#     product_type = db.Column(db.Text, nullable=False, default='N/A')
-#     category = db.Column(db.Text, nullable=False, default='N/A')
-#     image = db.Column(db.Text, nullable=False)
-#     color = db.Column(db.Text, nullable=False, default='N/A')
-
-
 class Brand(db.Model):
 
     __tablename__ = "brands"
@@ -58,15 +41,9 @@ class UserProduct(db.Model):
 
     __tablename__ = "users_products"
 
-    user_id = db.Column (
-                db.Integer, 
-                db.ForeignKey('users.id', ondelete="cascade"), 
-                primary_key=True)
+    user_id = db.Column (db.Integer, db.ForeignKey('users.id'), primary_key=True)
 
-    product_id = db.Column (
-                    db.Integer, 
-                    db.ForeignKey('products.id', ondelete="cascade"), 
-                    primary_key=True)
+    product_id = db.Column (db.Integer, db.ForeignKey('products.id'), primary_key=True)
 
 
 class Product(db.Model):
@@ -91,9 +68,10 @@ class Product(db.Model):
     product_type = db.relationship("Type")
     category = db.relationship("Category")
 
-    users = db.relationship(
-                "User",
-                secondary="users_products")
+    # users = db.relationship(
+    #             "User",
+    #             secondary="users_products",
+    #             cascade="all, delete")
 
 
 class User(db.Model):
@@ -101,13 +79,10 @@ class User(db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    email = db.Column(db.Text, nullable=False)
+    email = db.Column(db.Text, nullable=False, unique=True)
     password = db.Column(db.Text, nullable=False)
 
-    products = db.relationship(
-        "Product",
-        secondary="users_products",
-    )
+    products = db.relationship("Product",secondary="users_products",cascade="all, delete", backref="users", passive_deletes=True)
 
     @classmethod
     def signup(cls, email, password):
@@ -146,6 +121,7 @@ class User(db.Model):
                 return False
             if is_auth:
                 return user
+
 
         return False
 

@@ -3,6 +3,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Product, User, UserProduct, Brand, Type, Category
 from decorators import login_required
 from forms import LoginForm, UserForm
+from wtforms.validators import ValidationError
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql.expression import func
@@ -82,16 +83,20 @@ def signup():
     form = UserForm()
 
     if form.validate_on_submit():
-        try:
-            user = User.signup(
-                password=form.password.data,
-                email=form.email.data
-            )
-            db.session.commit()
+        # try:
+        #     user = User.signup(
+        #         password=form.password.data,
+        #         email=form.email.data
+        #     )
+        #     db.session.commit()
 
-        except IntegrityError:
-            flash("Username already taken", 'danger')
-            return render_template('signup.html', form=form)
+        # except IntegrityError:
+        #     flash("Username already taken", 'danger')
+        #     return render_template('signup.html', form=form)
+
+        user = User.signup(password=form.password.data,email=form.email.data)
+        
+        db.session.commit()
 
         do_login(user)
         add_user_to_g()
@@ -108,17 +113,19 @@ def login():
 
     form = LoginForm()
 
-    if form.validate_on_submit():
-        user = User.authenticate(form.email.data,
-                                 form.password.data)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user = User.authenticate(form.email.data,
+                                    form.password.data)
 
-        if user:
-            do_login(user)
-            flash(f"Hello, {user.email}!", "success")
-            return redirect(url_for('collection'))
-        else:
-            flash("Invalid credentials.", 'danger')
-            return render_template('login.html', form=form)
+            if user:
+                do_login(user)
+                # flash(f"Hello, {user.email}!", "success")
+                return redirect(url_for('collection'))
+            else:
+                # flash("Invalid credentials.", 'danger')
+                form.password.errors.append('Incorrect password')
+                return render_template('login.html', form=form)
 
     return render_template('login.html', form=form)
 
@@ -145,7 +152,7 @@ def collection():
 
     types = Type.query.order_by(Type.name).all()
 
-    return render_template('collection.html', products=g.user.products, brands=brands, types=types)
+    return render_template('collection2.html', products=g.user.products, brands=brands, types=types)
 
 
 @app.route('/search', methods=["GET"])
@@ -159,14 +166,14 @@ def search():
 
     offset = request.args.get('offset', 0)
     
-    print('search_term ------------->', search_term, file=sys.stderr)
+    # print('search_term ------------->', search_term, file=sys.stderr)
 
-    page_num = math.ceil(Product.query.filter( (func.lower(Product.name).contains(search_term.lower())) | Product.brand.has(name=search_term) | (Product.product_type.has(name=search_term))).count() / 28)
+    # page_num = math.ceil(Product.query.filter( (func.lower(Product.name).contains(search_term.lower())) | Product.brand.has(name=search_term) | (Product.product_type.has(name=search_term))).count() / 28)
 
     # results = Product.query.filter( (func.lower(Product.name).contains(search_term.lower())) | Product.brand.has(name=search_term) | (Product.product_type.has(name=search_term))).limit(28).offset(offset).all()
 
     search_terms = search_term.split(' ')
-    print('search_terms--------->',search_terms, file=sys.stderr)
+    # print('search_terms--------->',search_terms, file=sys.stderr)
     if len(search_terms) == 1:
         search_results = Product.query.filter(Product.search_terms.ilike(f"%{search_terms[0]}%")).all()
     else:
@@ -198,7 +205,8 @@ def search():
 
     types = Type.query.order_by(Type.name).all()
 
-    return render_template('results.html', products=search_results, page_num=page_num, search_term=search_term, types=types, brands=brands)
+    # return render_template('results.html', products=search_results, page_num=page_num, search_term=search_term, types=types, brands=brands)
+    return render_template('results.html', products=search_results, search_term=search_term, types=types, brands=brands)
 
 
 @app.route('/add/<int:product_id>', methods=["POST"])
