@@ -1,77 +1,37 @@
 {% extends 'index.html' %}
 {% block content %}
 
-<!-- <div class="container mt-5">
-<h1 class="display-1">Sign Up</h1>
-<p class="lead">Register below to join our application. Already have an account? <a href='{{url_for('login')}}'>Login</a> here.</p>
-<form method="POST">
-    {{ form.hidden_tag() }}
-
-    {% for field in form
-    if field.widget.input_type != 'hidden' %}
-    <p>
-      {{ field.label }}
-      {{ field(class_="form-control") }}
-  
-      {% for error in field.errors %}
-      <span class="form-text text-danger">{{ error }}</span>
-      {% endfor %}
-    </p>
-    {% endfor %}
-  
-    <button class="btn btn-primary" type="submit">Register</button>
-</form></div> -->
 <section class="login-signup-forms">
-<div class="d-flex align-items-center" style="height:100vh;">
-  <div class="container">
-    <div class="row mt">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">Sign Up</h5>
-            <form method="POST">
-              {{ form.hidden_tag() }}
-          
-              {% for field in form
-              if field.widget.input_type != 'hidden' %}
-              <p>
-                {{ field.label }}
-                {{ field(class_="form-control w-100") }}
+  <div class="d-flex align-items-center" style="height:100vh;">
+    <div class="container">
+      <div class="row mt">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">Sign Up</h5>
+              <form method="POST">
+                {{ form.hidden_tag() }}
             
-                {% for error in field.errors %}
-                <span class="form-text text-danger">{{ error }}</span>
+                {% for field in form
+                if field.widget.input_type != 'hidden' %}
+                <p>
+                  {{ field.label }}
+                  {{ field(class_="form-control w-100") }}
+              
+                  {% for error in field.errors %}
+                  <span class="form-text text-danger">{{ error }}</span>
+                  {% endfor %}
+                </p>
                 {% endfor %}
-              </p>
-              {% endfor %}
-            
-              <button class="btn btn-primary btn-block" type="submit">Register</button>
-          </form>
-            <!-- <form class="form-signin">
-              <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <label for="inputEmail">Email address</label>
-              </div>
-
-              <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
-              </div>
-
-              <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Remember password</label>
-              </div>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-              <hr class="my-4">
-              <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
-              <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
-            </form> -->
+              
+                <button class="btn btn-primary btn-block" type="submit">Register</button>
+            </form>
             <p class="mt-3 text-center">Already have an account? <a href='{{url_for('login')}}'>Login</a></p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </section>
 {% endblock %}
