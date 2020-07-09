@@ -1,8 +1,0 @@
-<form class="form-inline d-inline w-100" action='{{url_for('search')}}' method='GET'>
-              <div class="btn-group">
-              <input class="form-control mr-2" style="width: 300px;" id="search" type="search" placeholder="Search for product to add" aria-label="Search" name="search-term">
-              <!-- <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search for product to add" aria-label="Search" name="search-term"> -->
-              <button class="btn btn-light" id="searchBtn"><i class="fas fa-search"></i></button>
-              <!-- <button class="btn btn-light my-2 my-sm-0" id="searchBtn">Search</button> -->
-            </div>
-            </form>
