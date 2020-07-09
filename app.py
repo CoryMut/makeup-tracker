@@ -68,6 +68,12 @@ def do_logout():
         del session[CURR_USER_KEY]
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    """Redirects 404 to home page with error message"""
+    return redirect(url_for('collection'))
+
+
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     """Handle user signup.
@@ -111,6 +117,9 @@ def signup():
 def login():
     """Handle user login."""
 
+    if 'curr_user' in session:
+        return redirect(url_for('collection'))
+
     form = LoginForm()
 
     if request.method == 'POST':
@@ -120,10 +129,9 @@ def login():
 
             if user:
                 do_login(user)
-                # flash(f"Hello, {user.email}!", "success")
                 return redirect(url_for('collection'))
+
             else:
-                # flash("Invalid credentials.", 'danger')
                 form.password.errors.append('Incorrect password')
                 return render_template('login.html', form=form)
 
@@ -152,7 +160,7 @@ def collection():
 
     types = Type.query.order_by(Type.name).all()
 
-    return render_template('collection2.html', products=g.user.products, brands=brands, types=types)
+    return render_template('collection.html', products=g.user.products, brands=brands, types=types)
 
 
 @app.route('/search', methods=["GET"])
@@ -166,14 +174,12 @@ def search():
 
     offset = request.args.get('offset', 0)
     
-    # print('search_term ------------->', search_term, file=sys.stderr)
-
     # page_num = math.ceil(Product.query.filter( (func.lower(Product.name).contains(search_term.lower())) | Product.brand.has(name=search_term) | (Product.product_type.has(name=search_term))).count() / 28)
 
     # results = Product.query.filter( (func.lower(Product.name).contains(search_term.lower())) | Product.brand.has(name=search_term) | (Product.product_type.has(name=search_term))).limit(28).offset(offset).all()
 
     search_terms = search_term.split(' ')
-    # print('search_terms--------->',search_terms, file=sys.stderr)
+
     if len(search_terms) == 1:
         search_results = Product.query.filter(Product.search_terms.ilike(f"%{search_terms[0]}%")).all()
     else:

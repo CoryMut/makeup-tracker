@@ -7,69 +7,119 @@
 </div>
 {%- endmacro %}
 
-<div class="float-left ml-5" id="checkboxes">
-  {% if not search_term %}
-  <div class="d-flex justify-content-center">
-    <button class="btn btn-primary editBtn mt-2">Edit Collection</button>
-  </div>
-  {% endif %}
-  <section id="brand-boxes">
-    <b><p class="ml-4 mt-2">Brand</p></b>
-    {% for brand in brands %}
-      {% if brand == '' or brand == ' ' %}
-      {% else %}
-        {{checkbox(brand, brand, 'brand-box')}}
-      {% endif %}
-    {% endfor %}
-  </section>
-  <br>
-  <b><p class="ml-4">Category</p></b>
-    {{checkbox('Eyes', Eye, 'category-box')}}
-    {{checkbox('Face', Face, 'category-box')}}
-    {{checkbox('Lips', Lip, 'category-box')}}
-  <br>
-  <b><p class="ml-4">Type</p></b>
-  {% for type in types %}
-    {{checkbox(type.name, type.name, 'type-box')}}
-  {% endfor %}
+{% macro checkbox2(value, id, type) -%}
+<div class="form-check m-2">
+  <input class="form-check-input {{type}} large-check" type="checkbox" value="{{value}}" id={{id}}>
+  <label class="form-check-label ml-3 boxes-mobile" for="{{id}}">
+    {{value}}
+  </label>
 </div>
+{%- endmacro %}
 
-<div class="container">
-  {% include 'alerts.html' %}
-  <div class="row row-cols-1 row-cols-md-5 main">
-    {% for product in products %}
-    <div class="col-sm-6 col-md-6 col-lg-3 mb-4 card-div product" data-brand="{{product.brand.name}}" data-category="{{product.category.name}}" data-type= "{{product.product_type.name}}" data-id2={{product.id}} id="product-{{product.id}}">
-      <div class="card h-100" data-id={{product.id}}>
-        {% if product.color_image != 'N/A' %}
-        <div>
-          <img class="float-right mini-color mt-1 mr-1" src="{{product.color_image}}" alt="color of product"">
-        </div>
-        {% else %}
-        <div style="margin-top:50px;"></div>
-        {% endif %}
-        <img class="card-img-top2 card-img mx-auto mt-1" src="{{product.image}}" alt="Card image cap" id="image-{{product.id}}">
-        <div class="card-body mx-auto d-flex flex-column">
-          <h5 class="card-title text-center flavor"><a href={{product.link}}>{{product.name}} {% if product.color != 'N/A' %}-{{product.color}} {% endif%}</a></h5>
-          {% include 'table.html' %}
-          {% if search_term %}
-          {% if product not in g.user.products %}
-          <form action='/add/{{product.id}}' method="POST" class="mt-auto">
-            <button class="btn btn-primary btn-block mt-auto addBtn" data-id="{{product.id}}">Add to Collection</button>
-          </form>
-          {% else %}
-          <button class="btn btn-green btn-block mt-auto addBtn text-light" data-id="{{product.id}}" disabled>Already in Collection</button>
+<!-- <div class="d-flex flex-row justify-content-center"> -->
+  
+
+  <div class="container col-10 mt-5">
+    {% include 'alerts.html' %}
+    <!-- <div class="col-8"> -->
+      <div class="float-left" id="section-filter">
+        <div class="mx-auto" id="checkboxes">
+          {% if not search_term %}
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary editBtn mt-2">Edit Collection</button>
+          </div>
           {% endif %}
-          {% else %}
-          <button class="btn btn-danger btn-block mt-auto removeBtn text-light hidden" data-id="{{product.id}}">Remove</button>
-          {% endif %}
+          <section id="brand-boxes">
+            <b><p class="ml-4 mt-2">Brand</p></b>
+            {% for brand in brands %}
+              {% if brand == '' or brand == ' ' %}
+              {% else %}
+                {{checkbox(brand, brand, 'brand-box')}}
+              {% endif %}
+            {% endfor %}
+          </section>
+          <br>
+          <b><p class="ml-4">Category</p></b>
+            {{checkbox('Eyes', Eye, 'category-box')}}
+            {{checkbox('Face', Face, 'category-box')}}
+            {{checkbox('Lips', Lip, 'category-box')}}
+          <br>
+          <b><p class="ml-4">Type</p></b>
+          {% for type in types %}
+            {{checkbox(type.name, type.name, 'type-box')}}
+          {% endfor %}
         </div>
       </div>
-    </div>
-    {% endfor %}
-  </div>        
+      
+      <div class="hidden mb-3" id="section-filter2">
+        <div class="mx-auto" id="checkboxes">
+          {% if not search_term %}
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary editBtn mt-2">Edit Collection</button>
+          </div>
+          {% endif %}
+          <section id="brand-boxes-mobile" class="boxes-mobile">
+            <b><p class="ml-4 mt-2">Brand</p></b>
+            {% for brand in brands %}
+              {% if brand == '' or brand == ' ' %}
+              {% else %}
+                {{checkbox2(brand, brand, 'brand-box')}}
+              {% endif %}
+            {% endfor %}
+          </section>
+          <br>
+          <b><p class="ml-4">Category</p></b>
+            {{checkbox2('Eyes', Eye, 'category-box')}}
+            {{checkbox2('Face', Face, 'category-box')}}
+            {{checkbox2('Lips', Lip, 'category-box')}}
+          <br>
+          <b><p class="ml-4">Type</p></b>
+          {% for type in types %}
+            {{checkbox2(type.name, type.name, 'type-box')}}
+          {% endfor %}
+        </div>
+      </div>
+
+
+      <div class="row row-cols-1 row-cols-md-5 main">
+        {% for product in products %}
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3 mb-4 card-div product" data-brand="{{product.brand.name}}" data-category="{{product.category.name}}" data-type= "{{product.product_type.name}}" data-id2={{product.id}} id="product-{{product.id}}">
+          <div class="card h-100" data-id={{product.id}}>
+            {% if product.color_image != 'N/A' %}
+            <div>
+              <img class="float-right mini-color mt-1 mr-1" src="{{product.color_image}}" alt="color of product"">
+            </div>
+            {% else %}
+            <div style="margin-top:50px;"></div>
+            {% endif %}
+            <img class="card-img-top2 card-img mx-auto mt-1" src="{{product.image}}" alt="Card image cap" id="image-{{product.id}}">
+            <div class="card-body mx-auto d-flex flex-column">
+              <h5 class="card-title text-center flavor"><a href={{product.link}}>{{product.name}} {% if product.color != 'N/A' %}-{{product.color}} {% endif%}</a></h5>
+              {% include 'table.html' %}
+              {% if search_term %}
+              {% if product not in g.user.products %}
+              <form action='/add/{{product.id}}' method="POST" class="mt-auto">
+                <button class="btn btn-primary btn-block mt-auto addBtn" data-id="{{product.id}}">Add to Collection</button>
+              </form>
+              {% else %}
+              <button class="btn btn-green btn-block mt-auto addBtn text-light" data-id="{{product.id}}" disabled>Already in Collection</button>
+              {% endif %}
+              {% else %}
+              <button class="btn btn-danger btn-block mt-auto removeBtn text-light hidden" data-id="{{product.id}}">Remove</button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>        
+  <!-- </div> -->
+<!-- </div> -->
+
+  <!-- <div class="col-2"></div> -->
+
 </div>
+
 
 {% block scripts %}
 <script src="/static/filters.js"></script>
-<script src="/static/lazy_loading.js"></script>
 {% endblock %}

@@ -3,7 +3,10 @@
 {% block content %}
 <div class="container main-label">
     <h1 class="display-4 text-center">My Collection</h1>
-    <p class="lead text-center mb-5">Search for products to add them to your collection.</p>
+    <p class="lead text-center">Search for products to add them to your collection.</p>
+    <div class="text-center hidden" id="filterBtn">
+        <button class="btn bg-light text-center d-inline mb-2">Filter <i class="fas fa-sort"></i></button>
+    </div>
 </div>
 
 {% include 'display_products.html' %}
@@ -13,4 +16,13 @@
 {% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js" integrity="sha256-T/f7Sju1ZfNNfBh7skWn0idlCBcI3RwdLSS4/I7NQKQ=" crossorigin="anonymous"></script>
 <script src='/static/edit_collection.js'></script>
+
+<script>
+    document.querySelector('#filterBtn').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.querySelector('#section-filter2').classList.toggle('hidden')
+    })
+    
+</script>
+
 {% endblock %}
