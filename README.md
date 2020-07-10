@@ -17,7 +17,7 @@ A large part of this project was obtaining the data and making it automated. Thi
 Support for more than one collection will come later with the idea that people will be able to share recommended products quickly and in one place to their friends, clients, or anyone!
 
 Project was completed using:
--Javascript
--Python
--Flask/jinja2
--beautifulsoup4
+* Javascript
+* Python
+* Flask/jinja2
+* beautifulsoup4
