@@ -4,7 +4,7 @@ document.addEventListener('click', async function(event) {
 	if (target.tagName === 'BUTTON' && target.classList.contains('addBtn')) {
 		event.preventDefault();
 		const productID = target.dataset.id;
-		response = await axios.post(`/add/${productID}`);
+		const response = await axios.post(`/add/${productID}`);
 
 		updateCollectionDOM(target);
 	}

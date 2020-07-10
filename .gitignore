@@ -4,13 +4,7 @@ __pycache__/
 seeds/
 experiments/
 dumb/
-individual_html/
 backups/
 all_products_html/
-auto_product_html/
-auto_product_html_2/
-auto_product_txt/
-auto_product_txt_2/
-product_txt_lists/
 each_product_html.py
-every_product.py
+safe/
