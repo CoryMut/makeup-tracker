@@ -124,7 +124,7 @@ def login():
 @app.route('/')
 def home_page():
     """Renders homepage prompting user to go to their collection"""
-
+    print('endpoint---->',request.endpoint, file=sys.stderr)
     return render_template('homepage.html')
 
 
@@ -230,5 +230,4 @@ def logout():
     """Handle logout of user."""
 
     do_logout()
-    flash('Log out successful.', 'success')
     return redirect(url_for('login'))

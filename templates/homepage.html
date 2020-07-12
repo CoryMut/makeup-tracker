@@ -1,29 +1,39 @@
 {% extends 'index.html' %}
 
-{% block content %}
-
-<div class="background-pic">
-    <div class="mobile-text">
-        <div class="d-flex align-items-center flex-column justify-content-center text-center">
-            <div class="centered-mobile">
-                <p class="text-light">All of your makeup</p>
-                <p class="text-light">All in one place</p>
-                <div class="d-flex justify-content-center">
-                    <a href="/collection" class="btn btn-primary float-right mb-3">My Collection</a>
-                </div>
-            </div>
-        </div>
+{% block header %}
+<div class="hero-text-box text-center">
+    <h1>All your makeup.<br> Now in one place.</h1>
+    <div class="d-flex justify-content-center">
+        <a href="/collection" class="btn btn-primary mt-3 w-50">TRY IT OUT</a>
     </div>
 </div>
+{% endblock %}
 
-<div class="centered">
-    <span class="center-span" style="backdrop-filter: blur(6px);">
-        <h4 class="display-3">All your makeup</h4>
-        <p class="lead text-right mr-5">All in one place</p>
-        <span class="d-flex justify-content-end offset">
-            <a href="/collection" class="btn btn-primary float-right mb-3">My Collection</a>
-        </span>
-    </span>
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="display-4 text-center">About</h2>
+    <br>
+    <p class="long-copy text-center">
+        Have a rather large, disorganized collection of makeup? <br> Have you ever wanted a way to conveniently organize and keep track of that ever-growing collection?
+        <br> Well now you can! <br>
+    </p>
+    <p class='long-copy'>Currently, there is support for nearly 17,000 products when accounting for the different color options.
+        Once logged in, adding a product to your collection is as easy as searching by name, brand, type of product (such as 'blush' or 'foundation') and clicking the "Add to Collection" button. That's it!
+    </p>
+    <p class="long-copy">
+        Once a product has been added, you will see lots of information about the product, including a link to purchase the product, the brand, type of product, last known price, and the color.
+        Addtionally, a picture of the product is displayed along with the color of the product in the upper right corner.
+    </p>
+    <p class="long-copy">
+        But that's not all! Makeup-Tracker also has extensive filtering options, allowing you to quickly find products in your collection. This is especially useful for answering questions 
+        like "Do I still have that eyeliner?" or "Did I end up buying that Tarte foundation?". Filtering your collection answers those questions quickly!
+    </p>
+    <p class="long-copy">
+        A vast majority of the supported products are from Ulta. Support for Sephora and other companies will be added in the future. There will also be a way for you to add unsupported products to your own collections yourself!
+    </p>
+
 </div>
+
 
 {% endblock %}

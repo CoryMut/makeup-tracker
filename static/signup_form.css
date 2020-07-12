@@ -19,11 +19,10 @@ html {
 }
 
 nav {
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-size: 0.9rem;
+	line-height: 1.0;
 	margin: 0;
 	padding: 0;
-	line-height: 1.0;
 	font-weight: 0;
 }
 
@@ -78,7 +77,6 @@ section.login-signup-forms .form-signin {
 	display: block;
 	width: 100%;
 	margin-bottom: 0;
-	/* Override default `<label>` margin */
 	line-height: 1.5;
 	color: #495057;
 	border: 1px solid transparent;
@@ -116,38 +114,4 @@ section.login-signup-forms .form-signin {
 	padding-bottom: calc(var(--input-padding-y) / 3);
 	font-size: 12px;
 	color: #777;
-}
-
-/* .btn-google {
-	color: white;
-	background-color: #ea4335;
-}
-
-.btn-facebook {
-	color: white;
-	background-color: #3b5998;
-} */
-
-/* Fallback for Edge
-  -------------------------------------------------- */
-
-@supports (-ms-ime-align: auto) {
-	.login-signup-forms .form-label-group > label {
-		display: none;
-	}
-	.login-signup-forms .form-label-group input::-ms-input-placeholder {
-		color: #777;
-	}
-}
-
-/* Fallback for IE
-  -------------------------------------------------- */
-
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-	.login-signup-forms .form-label-group > label {
-		display: none;
-	}
-	.login-signup-forms .form-label-group input:-ms-input-placeholder {
-		color: #777;
-	}
 }

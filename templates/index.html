@@ -8,47 +8,57 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
     <link rel="stylesheet" href='static/app.css'>
+    {% if request.endpoint == 'home_page' %}
     <link rel="stylesheet" href='static/homepage.css'>
+    {% endif %}
     {% if request.endpoint == 'login' or request.endpoint == 'signup' %}
     <link rel="stylesheet" href='static/signup_form.css'>
     {% endif %}
     <title>Makeup Organizer</title>
 </head>
-<body>
 
+<header>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: black;">
-        <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav text-center">
-            <a class="nav-item nav-link active text-light" href="/">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link text-light" href="/collection">My Collection</a>
-            {% if 'curr_user' in session %}
-            <form action="/logout" method="POST" class="mx-auto">
-              <button class="nav-item nav-link text-light fakeBtn" type="submit">Logout</button>
-            </form>
-            {% else %}
-            <a class="nav-item nav-link text-light" href="/login">Login</a>
-            {% endif %}
-          </div>
-
+      <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav text-center">
+          <a class="nav-item nav-link active text-light" href="/">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link text-light" href="/collection">My Collection</a>
           {% if 'curr_user' in session %}
-          <div class="navbar-nav ml-auto">
-            <form class="form-inline d-inline w-100" action='{{url_for('search')}}' method="GET">
-              <div class="input-group">
-                <input type="text" id="search" name="search-term" class="form-control" placeholder="Search for product to add" style="width: 300px;" aria-label="Search">
-                <div class="input-group-append">
-                  <button class="btn btn-secondary" type="submit" id="searchBtn">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        {% endif %}
+          <form action="/logout" method="POST" class="mx-auto">
+            <button class="nav-item nav-link text-light fakeBtn" type="submit">Logout</button>
+          </form>
+          {% else %}
+          <a class="nav-item nav-link text-light" href="/login">Login</a>
+          {% endif %}
         </div>
-    </nav>
+
+        {% if 'curr_user' in session %}
+        <div class="navbar-nav ml-auto">
+          <form class="form-inline d-inline w-100" action='{{url_for('search')}}' method="GET">
+            <div class="input-group">
+              <input type="text" id="search" name="search-term" class="form-control" placeholder="Search for product to add" style="width: 300px;" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="submit" id="searchBtn">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      {% endif %}
+      </div>
+  </nav>
+
+  {% block header%}
+
+  {% endblock %}
+
+</header>
+
+<body>
 
     {% block content %}
 

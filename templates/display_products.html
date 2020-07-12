@@ -19,7 +19,7 @@
   <div class="container col-10 mt-5">
     {% include 'alerts.html' %}
       <div class="float-left" id="section-filter">
-        <div class="mx-auto" id="checkboxes">
+        <div class="mx-auto mb-5 p-3" id="checkboxes">
           {% if not search_term %}
           <div class="d-flex justify-content-center">
             <button class="btn btn-primary editBtn mt-2">Edit Collection</button>
@@ -83,7 +83,7 @@
           <div class="card h-100" data-id={{product.id}}>
             {% if product.color_image != 'N/A' %}
             <div>
-              <img class="float-right mini-color mt-1 mr-1" src="{{product.color_image}}" alt="color of product"">
+              <img class="float-right mini-color mt-3 mr-3" src="{{product.color_image}}" alt="color of product"">
             </div>
             {% else %}
             <div style="margin-top:50px;"></div>
